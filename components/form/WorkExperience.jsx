@@ -1,12 +1,29 @@
 import FormButton from "./FormButton";
 import React, { useContext } from "react";
 import { ResumeContext } from "../../pages/builder";
+import SpeechToText from "./SpeechToText";
 
 const WorkExperience = () => {
   const {
     resumeData,
     setResumeData,
   } = useContext(ResumeContext);
+  const [selectedField, setSelectedField] = React.useState(null);
+
+  const handleSpeechResult = (transcript) => {
+    if (selectedField) {
+      const [fieldName, index] = selectedField.split('-');
+      if (index !== undefined) {
+        const newWorkExperience = [...resumeData.workExperience];
+        newWorkExperience[parseInt(index)][fieldName] = transcript;
+        setResumeData({ ...resumeData, workExperience: newWorkExperience });
+      }
+    }
+  };
+
+  const handleFieldFocus = (fieldName, index) => {
+    setSelectedField(`${fieldName}-${index}`);
+  };
 
   const handleWorkExperience = (e, index) => {
     const newworkExperience = [...resumeData.workExperience];
@@ -50,51 +67,57 @@ const WorkExperience = () => {
             type="text"
             placeholder="Company"
             name="company"
-            className="w-full other-input"
+            className={`w-full other-input ${selectedField === `company-${index}` ? 'ring-2 ring-blue-500' : ''}`}
             value={workExperience.company}
             onChange={(e) => handleWorkExperience(e, index)}
+            onFocus={() => handleFieldFocus('company', index)}
           />
           <input
             type="text"
             placeholder="Job Title"
             name="position"
-            className="w-full other-input"
+            className={`w-full other-input ${selectedField === `position-${index}` ? 'ring-2 ring-blue-500' : ''}`}
             value={workExperience.position}
             onChange={(e) => handleWorkExperience(e, index)}
+            onFocus={() => handleFieldFocus('position', index)}
           />
           <textarea
             type="text"
             placeholder="Description"
             name="description"
-            className="w-full other-input h-32"
+            className={`w-full other-input h-32 ${selectedField === `description-${index}` ? 'ring-2 ring-blue-500' : ''}`}
             value={workExperience.description}
             maxLength="250"
             onChange={(e) => handleWorkExperience(e, index)}
+            onFocus={() => handleFieldFocus('description', index)}
           />
           <textarea
             type="text"
             placeholder="Key Achievements"
             name="keyAchievements"
-            className="w-full other-input h-40"
+            className={`w-full other-input h-40 ${selectedField === `keyAchievements-${index}` ? 'ring-2 ring-blue-500' : ''}`}
             value={workExperience.keyAchievements}
             onChange={(e) => handleWorkExperience(e, index)}
+            onFocus={() => handleFieldFocus('keyAchievements', index)}
           />
           <div className="flex-wrap-gap-2">
             <input
               type="date"
               placeholder="Start Year"
               name="startYear"
-              className="other-input"
+              className={`other-input ${selectedField === `startYear-${index}` ? 'ring-2 ring-blue-500' : ''}`}
               value={workExperience.startYear}
               onChange={(e) => handleWorkExperience(e, index)}
+              onFocus={() => handleFieldFocus('startYear', index)}
             />
             <input
               type="date"
               placeholder="End Year"
               name="endYear"
-              className="other-input"
+              className={`other-input ${selectedField === `endYear-${index}` ? 'ring-2 ring-blue-500' : ''}`}
               value={workExperience.endYear}
               onChange={(e) => handleWorkExperience(e, index)}
+              onFocus={() => handleFieldFocus('endYear', index)}
             />
           </div>
         </div>

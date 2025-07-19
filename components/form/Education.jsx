@@ -1,9 +1,24 @@
 import FormButton from "./FormButton";
 import React, { useContext } from "react";
 import { ResumeContext } from "../../pages/builder";
+import SpeechToText from "./SpeechToText";
 
 const Education = () => {
     const { resumeData, setResumeData} = useContext(ResumeContext);
+    const [selectedField, setSelectedField] = React.useState(null);
+
+    const handleSpeechResult = (transcript) => {
+      if (selectedField) {
+        const [fieldName, index] = selectedField.split('-');
+        const newEducation = [...resumeData.education];
+        newEducation[parseInt(index)][fieldName] = transcript;
+        setResumeData({ ...resumeData, education: newEducation });
+      }
+    };
+
+    const handleFieldFocus = (fieldName, index) => {
+      setSelectedField(`${fieldName}-${index}`);
+    };
 
     const handleEducation = (e, index) => {
       const newEducation = [...resumeData.education];
@@ -40,9 +55,9 @@ const Education = () => {
               type="text"
               placeholder="School"
               name="school"
-              className="w-full other-input"
+              className={`w-full other-input ${selectedField === `school-${index}` ? 'ring-2 ring-blue-500' : ''}`}
               value={education.school}
-              onChange={(e) => handleEducation(e, index)} />
+              onChange={(e) => handleEducation(e, index)}
             <input
               type="text"
               placeholder="Degree"
@@ -55,16 +70,18 @@ const Education = () => {
                 type="date"
                 placeholder="Start Year"
                 name="startYear"
-                className="other-input"
+                className={`other-input ${selectedField === `startYear-${index}` ? 'ring-2 ring-blue-500' : ''}`}
                 value={education.startYear}
-                onChange={(e) => handleEducation(e, index)} />
+                onChange={(e) => handleEducation(e, index)}
+                onFocus={() => handleFieldFocus('startYear', index)} />
               <input
                 type="date"
                 placeholder="End Year"
                 name="endYear"
-                className="other-input"
+                className={`other-input ${selectedField === `endYear-${index}` ? 'ring-2 ring-blue-500' : ''}`}
                 value={education.endYear}
-                onChange={(e) => handleEducation(e, index)} />
+                onChange={(e) => handleEducation(e, index)}
+                onFocus={() => handleFieldFocus('endYear', index)} />
             </div>
           </div>
         ))}

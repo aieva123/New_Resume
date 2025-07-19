@@ -1,9 +1,34 @@
 import React, { useContext } from "react";
 import { ResumeContext } from "../../pages/builder";
 import FormButton from "./FormButton";
+import SpeechToText from "./SpeechToText";
 
 const Skill = ({ title }) => {
   const { resumeData, setResumeData } = useContext(ResumeContext);
+  const [selectedField, setSelectedField] = React.useState(null);
+
+  const handleSpeechResult = (transcript) => {
+    if (selectedField) {
+      const [fieldName, index] = selectedField.split('-');
+      if (index !== undefined && fieldName === title) {
+        const newSkills = [
+          ...resumeData.skills.find((skillType) => skillType.title === title)
+            .skills,
+        ];
+        newSkills[parseInt(index)] = transcript;
+        setResumeData((prevData) => ({
+          ...prevData,
+          skills: prevData.skills.map((skill) =>
+            skill.title === title ? { ...skill, skills: newSkills } : skill
+          ),
+        }));
+      }
+    }
+  };
+
+  const handleFieldFocus = (index) => {
+    setSelectedField(`${title}-${index}`);
+  };
 
   // skills
   const handleSkill = (e, index, title) => {
@@ -69,9 +94,10 @@ const Skill = ({ title }) => {
             type="text"
             placeholder={title}
             name={title}
-            className="w-full other-input"
+            className={`w-full other-input ${selectedField === `${title}-${index}` ? 'ring-2 ring-blue-500' : ''}`}
             value={skill}
             onChange={(e) => handleSkill(e, index, title)}
+            onFocus={() => handleFieldFocus(index)}
           />
         </div>
       ))}

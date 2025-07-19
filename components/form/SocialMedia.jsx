@@ -1,9 +1,26 @@
 import FormButton from "./FormButton";
 import React, { useContext } from "react";
 import { ResumeContext } from "../../pages/builder";
+import SpeechToText from "./SpeechToText";
 
 const SocialMedia = () => {
   const { resumeData, setResumeData } = useContext(ResumeContext);
+  const [selectedField, setSelectedField] = React.useState(null);
+
+  const handleSpeechResult = (transcript) => {
+    if (selectedField) {
+      const [fieldName, index] = selectedField.split('-');
+      if (index !== undefined) {
+        const newSocialMedia = [...resumeData.socialMedia];
+        newSocialMedia[parseInt(index)][fieldName] = transcript.replace("https://", "");
+        setResumeData({ ...resumeData, socialMedia: newSocialMedia });
+      }
+    }
+  };
+
+  const handleFieldFocus = (fieldName, index) => {
+    setSelectedField(`${fieldName}-${index}`);
+  };
 
   // social media
   const handleSocialMedia = (e, index) => {
@@ -41,17 +58,19 @@ const SocialMedia = () => {
             type="text"
             placeholder="Social Media"
             name="socialMedia"
-            className="other-input"
+            className={`other-input ${selectedField === `socialMedia-${index}` ? 'ring-2 ring-blue-500' : ''}`}
             value={socialMedia.socialMedia}
             onChange={(e) => handleSocialMedia(e, index)}
+            onFocus={() => handleFieldFocus('socialMedia', index)}
           />
           <input
             type="text"
             placeholder="Link"
             name="link"
-            className="other-input"
+            className={`other-input ${selectedField === `link-${index}` ? 'ring-2 ring-blue-500' : ''}`}
             value={socialMedia.link}
             onChange={(e) => handleSocialMedia(e, index)}
+            onFocus={() => handleFieldFocus('link', index)}
           />
         </div>
       ))}
