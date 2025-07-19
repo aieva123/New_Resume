@@ -39,27 +39,27 @@
 
 @layer components{
     .pi{
-        @apply p-2 mb-2 text-black bg-white rounded text-[0.9rem];
+        @apply p-3 mb-3 text-gray-800 bg-white rounded-lg border border-gray-200 shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 text-sm;
     }
 
     .profileInput{
-        @apply pi file:border-0 file:bg-fuchsia-500 file:text-white file:rounded-sm;
+        @apply pi file:border-0 file:bg-blue-600 file:text-white file:rounded-md file:px-3 file:py-2 file:mr-3 file:cursor-pointer hover:file:bg-blue-700;
     }
 
     .flex-col-gap-2{
-        @apply flex flex-col gap-2;
+        @apply flex flex-col gap-3;
     }
 
     .flex-wrap-gap-2{
-        @apply flex flex-wrap gap-2;
+        @apply flex flex-wrap gap-3;
     }
 
     .other-input{
-        @apply p-2 mb-2 text-black bg-white rounded focus:placeholder-transparent;
+        @apply p-3 mb-3 text-gray-800 bg-white rounded-lg border border-gray-200 shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:placeholder-transparent transition-all duration-200 text-sm;
     }
 
     .input-title{
-        @apply text-[1rem] text-white font-semibold;
+        @apply text-lg text-gray-800 font-semibold mb-3 flex items-center justify-between;
     }
 
     .f-col{
@@ -67,7 +67,7 @@
     }
 
     .grid-4{
-        @apply grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] gap-4;
+        @apply grid grid-cols-1 md:grid-cols-2 gap-3;
     }
 
     .editable{

@@ -3,9 +3,12 @@ import { ResumeContext } from "../../pages/builder";
 const Summary = () => {
   const { resumeData, setResumeData, handleChange } = useContext(ResumeContext);
   return (
-    <div className="flex-col-gap-2">
-      <h2 className="input-title">Summary</h2>
-      <div className="grid-4">
+    <div className="flex-col-gap-2 mb-6 p-4 bg-white rounded-lg shadow-sm border border-gray-200">
+      <h2 className="input-title">
+        Summary
+        <SpeechToText onResult={handleSpeechResult} selectedField={selectedField} />
+      </h2>
+      <div>
         <textarea
           placeholder="Summary"
           name="summary"

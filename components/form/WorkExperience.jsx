@@ -39,8 +39,11 @@ const WorkExperience = () => {
   };
 
   return (
-    <div className="flex-col-gap-2">
-      <h2 className="input-title">Work Experience</h2>
+    <div className="flex-col-gap-2 mb-6 p-4 bg-white rounded-lg shadow-sm border border-gray-200">
+      <h2 className="input-title">
+        Work Experience
+        <SpeechToText onResult={handleSpeechResult} selectedField={selectedField} />
+      </h2>
       {resumeData.workExperience.map((workExperience, index) => (
         <div key={index} className="f-col">
           <input

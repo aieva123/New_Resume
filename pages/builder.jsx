@@ -66,7 +66,7 @@ export default function Builder(props) {
         />
         <div className="f-col gap-4 md:flex-row justify-evenly max-w-7xl md:mx-auto md:h-screen">
           {!formClose && (
-            <form className="p-4 bg-fuchsia-600 exclude-print md:max-w-[40%] md:h-screen md:overflow-y-scroll">
+            <form className="p-6 bg-gradient-to-br from-slate-50 to-blue-50 exclude-print md:max-w-[40%] md:h-screen md:overflow-y-scroll border-r border-gray-200 shadow-lg">
               <LoadUnload/>
               <PersonalInformation />
               <SocialMedia />

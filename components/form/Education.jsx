@@ -29,8 +29,11 @@ const Education = () => {
     };
     
     return (
-      <div className="flex-col-gap-2">
-        <h2 className="input-title">Education</h2>
+      <div className="flex-col-gap-2 mb-6 p-4 bg-white rounded-lg shadow-sm border border-gray-200">
+        <h2 className="input-title">
+          Education
+          <SpeechToText onResult={handleSpeechResult} selectedField={selectedField} />
+        </h2>
         {resumeData.education.map((education, index) => (
           <div key={index} className="f-col">
             <input

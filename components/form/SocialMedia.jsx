@@ -30,8 +30,11 @@ const SocialMedia = () => {
   };
 
   return (
-    <div className="flex-col-gap-2">
-      <h2 className="input-title">Social Media</h2>
+    <div className="flex-col-gap-2 mb-6 p-4 bg-white rounded-lg shadow-sm border border-gray-200">
+      <h2 className="input-title">
+        Social Media
+        <SpeechToText onResult={handleSpeechResult} selectedField={selectedField} />
+      </h2>
       {resumeData.socialMedia.map((socialMedia, index) => (
         <div key={index} className="flex-wrap-gap-2">
           <input
