@@ -1,1 +1,14 @@
-{}
+{
+  "../components/preview/Preview.jsx -> react-beautiful-dnd": {
+    "id": "../components/preview/Preview.jsx -> react-beautiful-dnd",
+    "files": [
+      "static/chunks/node_modules_react-beautiful-dnd_dist_react-beautiful-dnd_esm_js.js"
+    ]
+  },
+  "builder.jsx -> ../components/utility/WinPrint": {
+    "id": "builder.jsx -> ../components/utility/WinPrint",
+    "files": [
+      "static/chunks/components_utility_WinPrint_js.js"
+    ]
+  }
+}
